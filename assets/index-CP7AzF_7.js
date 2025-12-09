@@ -1,0 +1,2 @@
+import{d as n,c as s,a as o,b as r,w as a,f as _,o as d,k as l}from"./vendor-CabQpQ8g.js";import{_ as p}from"./index-pg3RF8m4.js";const i={class:"not-found"},m=n({__name:"index",setup(u){return(f,e)=>{const t=_("router-link");return d(),s("div",i,[e[1]||(e[1]=o("h1",null,"404",-1)),e[2]||(e[2]=o("p",null,"Сторінку не знайдено",-1)),r(t,{to:"/"},{default:a(()=>e[0]||(e[0]=[l(" Повернутися на головну ",-1)])),_:1,__:[0]})])}}}),k=p(m,[["__scopeId","data-v-64c0eba9"]]);export{k as default};
+//# sourceMappingURL=index-CP7AzF_7.js.map
