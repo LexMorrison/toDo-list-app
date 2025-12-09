@@ -1,15 +1,85 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-    content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
-    theme: {
-        extend: {
-            fontFamily: {
-                sans: ['Inter', 'system-ui', 'sans-serif'],
-            },
-            spacing: {
-                18: '4.5rem',
-                88: '22rem',
-            },
+  content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
+  theme: {
+    extend: {
+      fontFamily: {
+        sans: ["Inter", "system-ui", "sans-serif"],
+      },
+      spacing: {
+        18: "4.5rem",
+        88: "22rem",
+      },
+
+      colors: {
+        light: {
+          warmOrange: "#FF7A59",
+          softLilac: "#E9D7FF",
+          deepSlateBlue: "#6A5ACD",
+          charcoalBlack: "#1A1A1A",
+          pureBlack: "#000000",
+          pureWhite: "#FFFFFF",
+          coolLightGray: "D0D5DD",
+          neutralGray: "#CACACA",
+          mustedSteelBlue: "#667085",
+          softLilac: "E9D7FF",
+          coolDarkBlueGray: "#344054",
+          softMistGray: "#E4E7EC",
+          lightNeutralGray: "#D9D9D9",
+          vividRed: "D32F2F",
+          brightBlue: "#1A73E8",
+          paleGray: "#F0F2F5",
+          brightRed: "#FF4545",
+          softOffWhite: "#F7F7F9",
+          lightCoolGray: "#F2F4F7",
+          paleCoolGray: "#F4F4F7",
+          softSkyBlue: "#C5D9FF",
+          deepNavy: "#101828",
+          softNearWhite: "#F9FAFB",
+          lightCoolGray: "#F3F4F6",
+          paleCoolGray: "#E5E7EB",
+          deepBlack: "#111111",
         },
+        dark: {
+          softViolet: "#B39CFF",
+          deepEggplant: "#3A2A5A",
+          charcoalNavy: "#1C1C24",
+          pureBlack: "#000000",
+          pureWhite: "#FFFFFF",
+          mutedLavenderGray: "#9A9AB0",
+          darkSlateGray: "#3F3F4C",
+          veryDarkGrayBlue: "#2A2A34",
+          darkSlate: "#3A3A48",
+          deepSteelBlue: "#2A3A55",
+          veryDarkSlate: "#1A1A22",
+          almostBlack: "#0E0E12",
+          mediumGray: "#626161",
+          darkCharcoalGray: "#2E2E37",
+          softLavenderGray: "#C9C9D3",
+          veryDarkGray: "#25252B",
+          brightRed: "#FF4545",
+          mutedCoolGray: "#6B7280",
+          vividBlue: "#3B82F6",
+          veryDarkGray: "#1E2227",
+          almostBlack: "#0D0F12",
+          vividRed2: "#F30000",
+          mutedBrownGray: "#7A6F6F",
+          veryDarkGrayBlue: "#1A1D21",
+          mediumGray: "#858585",
+          darkCoolBlueGray: "#1F2937",
+          charcoalBlueGray: "#374151",
+          deepNavyGray: "#111827",
+          softNearWhite: "#F9FAFB",
+        },
+      },
+
+      backgroundImage: {
+        "light-warm": "linear-gradient(#FF7A59, #E9D7FF)",
+        "light-bg": "linear-gradient(#F3F7FF, #E8EDFF)",
+        "dark-violet": "linear-gradient(#B39CFF, #6A4CFF)",
+        "dark-bg": "linear-gradient(#1A1A22, #0E0E12)",
+        "button-vivid": "linear-gradient(#6A4CFF, #9A59FF)",
+      },
     },
-}
+  },
+};

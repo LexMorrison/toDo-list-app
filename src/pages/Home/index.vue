@@ -1,3 +1,3 @@
 <script setup lang="ts"></script>
 
-<template><h1>Test</h1></template>
+<template><div class="bg-light-paleGray h-5 w-5"></div></template>
