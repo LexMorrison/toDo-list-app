@@ -5,8 +5,6 @@ import VueFeather from "vue-feather";
 import App from "./App.vue";
 import router from "./router";
 
-import { useThemeStore } from "@/features/theme/store/useThemeStore";
-
 import "./main.scss";
 
 // Create Vue app instance
@@ -21,7 +19,3 @@ app.component("VueFeather", VueFeather);
 
 // Mount the app
 app.mount("#app");
-
-const themeStore = useThemeStore();
-
-document.documentElement.classList.toggle("dark", themeStore.theme === "dark");

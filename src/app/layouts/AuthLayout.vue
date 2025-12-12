@@ -8,6 +8,6 @@ import ThemeToggle from "@/features/theme/components/ThemeToggle.vue";
       <ThemeToggle />
     </div>
 
-    <slot />
+    <router-view />
   </div>
 </template>
