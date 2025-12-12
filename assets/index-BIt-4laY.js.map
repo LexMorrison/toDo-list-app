@@ -1,0 +1,1 @@
+{"version":3,"file":"index-BIt-4laY.js","sources":["../../src/pages/Home/index.vue"],"sourcesContent":["<script setup lang=\"ts\"></script>\n\n<template>\n  <div class=\"bg-light-paleGray p-5 border border-light-warmOrange\">\n    home\n  </div>\n</template>\n"],"names":["_hoisted_1","_createElementBlock"],"mappings":"mGAGOA,EAAA,CAAA,MAAM,sDAAsD,6BAAjEC,EAEM,MAFND,EAAkE,QAElE"}

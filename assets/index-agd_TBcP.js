@@ -1,0 +1,2 @@
+import{j as n,l as s,q as o,u as r,A as a,x as _,v as l,s as d}from"./vendor-CVY7O3fn.js";import{_ as p}from"./index-s3Q6agB3.js";const i={class:"not-found"},u=n({__name:"index",setup(m){return(f,e)=>{const t=l("router-link");return d(),s("div",i,[e[1]||(e[1]=o("h1",null,"404",-1)),e[2]||(e[2]=o("p",null,"Сторінку не знайдено",-1)),r(t,{to:"/"},{default:a(()=>e[0]||(e[0]=[_(" Повернутися на головну ",-1)])),_:1,__:[0]})])}}}),k=p(u,[["__scopeId","data-v-64c0eba9"]]);export{k as default};
+//# sourceMappingURL=index-agd_TBcP.js.map
