@@ -1,45 +1,26 @@
 <script setup lang="ts">
 import { computed } from "vue";
 
-import { useThemeStore } from "../composables/useTheme";
+import { useThemeStore } from "../store/useThemeStore";
 
 const themeStore = useThemeStore();
+const isOn = computed(() => themeStore.theme === "dark");
 
-const isDark = computed(() => themeStore.isDark);
-
-const toggleTheme = () => {
-  themeStore.setTheme(isDark.value ? "light" : "dark");
+const toggle = () => {
+  themeStore.toggleTheme();
 };
 </script>
 
 <template>
-  <button
-    class="theme-toggle"
-    :aria-label="isDark ? 'Увімкнути світлу тему' : 'Увімкнути темну тему'"
-    @click="toggleTheme"
+  <div
+    class="w-16 h-8 rounded-[100px] flex items-center relative cursor-pointer transition-colors
+    duration-300"
+    :class="isOn ? 'bg-light-pureBlack' : ' bg-light-pureWhite'"
+    @click="toggle"
   >
-    <span v-if="isDark">🌙</span>
-    <span v-else>☀️</span>
-  </button>
+    <div
+      class="rounded-full w-7 h-7 absolute transition-all duration-300"
+      :class="isOn ? 'translate-x-8 bg-light-pureWhite' : 'translate-x-1  bg-light-pureBlack'"
+    />
+  </div>
 </template>
-
-<style scoped>
-.theme-toggle {
-  padding: 0.5rem;
-  border-radius: 0.5rem;
-  background: transparent;
-  border: 1px solid #e5e7eb;
-  cursor: pointer;
-  transition: all 0.2s;
-  font-size: 1.25rem;
-}
-
-.theme-toggle:hover {
-  background: #f3f4f6;
-}
-
-.theme-toggle:active {
-  transform: scale(0.95);
-}
-</style>
-

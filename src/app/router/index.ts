@@ -10,6 +10,24 @@ const routes: RouteRecordRaw[] = [
     },
   },
   {
+    path: "/login",
+    name: "Login",
+    component: () => import("@/pages/Login/index.vue"),
+    meta: {
+      title: "Login Vue 3 toDo List app",
+      layout: "auth",
+    },
+  },
+  {
+    path: "/registration",
+    name: "Registation",
+    component: () => import("@/pages/Registration/index.vue"),
+    meta: {
+      title: "Registation Vue 3 toDo List app",
+      layout: "auth",
+    },
+  },
+  {
     path: "/:pathMatch(.*)*",
     name: "NotFound",
     component: () => import("@/pages/NotFound/index.vue"),

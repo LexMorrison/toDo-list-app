@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
+  darkMode: "class",
   theme: {
     extend: {
       fontFamily: {
@@ -19,14 +20,14 @@ export default {
           charcoalBlack: "#1A1A1A",
           pureBlack: "#000000",
           pureWhite: "#FFFFFF",
-          coolLightGray: "D0D5DD",
+          coolLightGray: "#D0D5DD",
           neutralGray: "#CACACA",
           mustedSteelBlue: "#667085",
-          softLilac: "E9D7FF",
+          softLilac: "#E9D7FF",
           coolDarkBlueGray: "#344054",
           softMistGray: "#E4E7EC",
           lightNeutralGray: "#D9D9D9",
-          vividRed: "D32F2F",
+          vividRed: "#D32F2F",
           brightBlue: "#1A73E8",
           paleGray: "#F0F2F5",
           brightRed: "#FF4545",
@@ -75,9 +76,9 @@ export default {
 
       backgroundImage: {
         "light-warm": "linear-gradient(#FF7A59, #E9D7FF)",
-        "light-bg": "linear-gradient(#F3F7FF, #E8EDFF)",
+        "light-bg": "linear-gradient(180deg, #f3f7ff 0%, #e8edff 100%)",
         "dark-violet": "linear-gradient(#B39CFF, #6A4CFF)",
-        "dark-bg": "linear-gradient(#1A1A22, #0E0E12)",
+        "dark-bg": "linear-gradient(180deg, #1a1a22 0%, #0e0e12 100%)",
         "button-vivid": "linear-gradient(#6A4CFF, #9A59FF)",
       },
     },
