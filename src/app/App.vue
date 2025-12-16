@@ -9,7 +9,7 @@ import MasterLayout from "./layouts/MasterLayout.vue";
     id="app"
     class="min-h-screen bg-base-100 text-neutral"
   >
-    <main class="max-w-7xl mx-auto">
+    <main class="max-w-full mx-auto">
       <MasterLayout><RouterView /></MasterLayout>
     </main>
   </div>

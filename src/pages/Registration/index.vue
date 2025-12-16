@@ -1,3 +1,5 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import RegistrationFeature from "@/features/auth/components/RegistrationFeature.vue";
+</script>
 
-<template><h1>dvsdv</h1></template>
+<template><RegistrationFeature /></template>

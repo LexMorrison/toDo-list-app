@@ -73,6 +73,12 @@ export default {
           softNearWhite: "#F9FAFB",
         },
       },
+      boxShadow: {
+        logo: "0 4px 30px rgba(106, 76, 255, 0.3)",
+        formLight: "box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.15)",
+        submitLight: "0 4px 12px 0 rgba(0, 0, 0, 0.2)",
+        submitDark: " 0 8px 25px 0 rgba(0, 0, 0, 0.4)",
+      },
 
       backgroundImage: {
         "light-warm": "linear-gradient(#FF7A59, #E9D7FF)",
@@ -80,6 +86,7 @@ export default {
         "dark-violet": "linear-gradient(#B39CFF, #6A4CFF)",
         "dark-bg": "linear-gradient(180deg, #1a1a22 0%, #0e0e12 100%)",
         "button-vivid": "linear-gradient(#6A4CFF, #9A59FF)",
+        "submit-dark": "linear-gradient(90deg, #6a4cff 0%, #9a59ff 100%)",
       },
     },
   },
