@@ -2,20 +2,29 @@
 import { PhEye, PhEyeSlash, PhUser, PhLock } from "@phosphor-icons/vue";
 import useVuelidate from "@vuelidate/core";
 import { required, email, helpers } from "@vuelidate/validators";
-import axios from "axios";
 import { reactive, ref, computed, watch } from "vue";
 import { RouterLink } from "vue-router";
 
+import { tokenManager } from "@/shared/api";
+import { useApiPost } from "@/shared/composables/useApi";
+import VButton from "@/shared/ui/common/VButton.vue";
 import VInput from "@/shared/ui/common/VInput.vue";
 
-const form = reactive({
+type Login = {
+  email: string;
+  password: string;
+};
+
+type LoginResponce = {
+  accessToken: string;
+};
+
+const form = reactive<Login>({
   email: "",
   password: "",
 });
 
 const showPassword = ref(false);
-
-const validationError = ref(false);
 
 const passwordRegex = helpers.withMessage("Invalid password", (value: string) =>
   /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(value ?? ""),
@@ -27,52 +36,62 @@ const rules = computed(() => ({
 }));
 const v$ = useVuelidate(rules, form);
 
-const handleSubmit = async () => {
-  validationError.value = false;
+const { execute, loading, error, reset } = useApiPost<LoginResponce, Login>("/auth/login", {
+  skipAuth: true,
+});
 
-  const ok = await v$.value.$validate();
+const handleLogin = async () => {
+  v$.value.$touch();
+  const validation = await v$.value.$validate();
+  if (!validation) return;
 
-  if (!ok) {
-    validationError.value = true;
-    return;
-  }
+  const data = await execute({ data: { ...form } });
+  if (!data) return;
 
-  try {
-    const { data } = await axios.post("https://todolistbackend-z85b.onrender.com/api/auth/login", {
-      ...form,
-    });
-    console.log(data);
-  } catch (error) {
-    console.error(error);
-  }
+  tokenManager.setTokens({
+    accessToken: data.accessToken,
+  } as any);
 };
 
 watch(
   () => ({ ...form }),
   () => {
-    validationError.value = false;
+    reset();
   },
 );
 </script>
 
 <template>
   <form
-    class="flex flex-col border rounded-[32px] pt-[60px] pb-[30px] px-10 w-fit bg-dark-pureWhite
-    dark:bg-dark-charcoalNavy shadow-formLight"
-    @submit.prevent="handleSubmit"
+    class="flex flex-col border rounded-[32px] pt-[60px] pb-[30px] px-10 w-fit
+    bg-dark-pureWhite dark:bg-dark-charcoalNavy shadow-formLight dark:border-transparent"
+    @submit.prevent="handleLogin"
   >
     <!-- Email -->
     <div class="mb-[54px]">
+      <label
+        for="email"
+        class="sr-only"
+      >
+        Email
+      </label>
       <VInput
+        id="email"
         v-model.trim="form.email"
         type="email"
         placeholder="Email"
-        class="border border-light-coolLightGray rounded-xl w-[340px] h-12 bg-light-neutralGray
-        outline-none dark:text-dark-mutedLavenderGray placeholder:text-light-mustedSteelBlue
-         placeholder:font-semibold placeholder:dark:text-dark-mutedLavenderGray
-         dark:bg-dark-veryDarkGrayBlue dark:border-dark-darkSlateGray"
+        class="border rounded-xl w-[340px] h-12 bg-light-neutralGray outline-none
+        dark:text-dark-mutedLavenderGray placeholder:text-light-mustedSteelBlue
+        placeholder:font-semibold placeholder:dark:text-dark-mutedLavenderGray
+        dark:bg-dark-veryDarkGrayBlue"
+        :class="
+          v$.email.$error
+            ? 'border-light-brightRed'
+            : 'border-light-coolLightGray dark:border-dark-darkSlateGray'
+        "
         autocomplete="email"
         @blur="v$.email.$touch()"
+        @update:model-value="v$.email.$reset()"
       >
         <template #left>
           <PhUser :size="20" />
@@ -82,51 +101,66 @@ watch(
 
     <!-- Password -->
     <div class="mb-[25px]">
+      <label
+        for="password"
+        class="sr-only"
+      >
+        Password
+      </label>
       <VInput
+        id="password"
         v-model="form.password"
         :type="showPassword ? 'text' : 'password'"
         placeholder="Password"
-        class="border border-light-coolLightGray rounded-xl w-[340px] h-12 bg-light-neutralGray
-        outline-none dark:text-dark-mutedLavenderGray placeholder:text-light-mustedSteelBlue
+        class="border rounded-xl w-[340px] h-12 bg-light-neutralGray outline-none
+        dark:text-dark-mutedLavenderGray placeholder:text-light-mustedSteelBlue
         placeholder:font-semibold placeholder:dark:text-dark-mutedLavenderGray
-        dark:bg-dark-veryDarkGrayBlue dark:border-dark-darkSlateGray"
-        autocomplete="current-password"
+        dark:bg-dark-veryDarkGrayBlue"
+        :class="
+          v$.password.$error
+            ? 'border-light-brightRed'
+            : 'border-light-coolLightGray dark:border-dark-darkSlateGray'
+        "
         @blur="v$.password.$touch()"
+        @update:model-value="v$.password.$reset()"
       >
         <template #left>
           <PhLock :size="20" />
         </template>
 
         <template #right>
-          <button
+          <VButton
             type="button"
-            class="flex items-center text-light-charcoalBlack hover:text-light-pureBlack
-            dark:text-dark-mutedLavenderGray dark:hover:text-dark-darkSlateGray"
+            class="flex items-center text-light-charcoalBlack
+            hover:text-light-pureBlack dark:text-dark-mutedLavenderGray
+            dark:hover:text-dark-darkSlateGray"
             @click="showPassword = !showPassword"
           >
             <component
               :is="showPassword ? PhEyeSlash : PhEye"
               :size="20"
             />
-          </button>
+          </VButton>
         </template>
       </VInput>
     </div>
     <div class="flex flex-col items-center gap-3">
       <p
-        class="text-sm text-red-500 text-center transition-opacity duration-200 min-h-[20px]"
-        :class="validationError ? 'opacity-100' : 'opacity-0'"
+        class="text-sm text-light-brightRed text-center transition-opacity duration-200
+        min-h-[20px]"
+        :class="error ? 'opacity-100' : 'opacity-0'"
       >
         Email or password are incorrect.
       </p>
-      <button
+      <VButton
         type="submit"
         class="w-[340px] shadow-submitLight bg-light-warmOrange rounded-xl h-[54px] text-[18px]
         font-semibold text-light-pureWhite cursor-pointer dark:shadow-submitDark
         dark:bg-submit-dark"
+        :disabled="loading"
       >
-        Войти
-      </button>
+        {{ loading ? "Loading..." : "Enter" }}
+      </VButton>
       <RouterLink
         to="/registration"
         class="text-[14px] font-semibold text-light-deepSlateBlue"

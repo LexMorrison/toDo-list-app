@@ -5,7 +5,17 @@ import VueFeather from "vue-feather";
 import App from "./App.vue";
 import router from "./router";
 
+import { setupApiClient, tokenManager } from "@/shared/api";
+
 import "./main.scss";
+
+// Initialization API-client(tokens and interceptors)
+setupApiClient({
+  onTokenRefreshFailed: () => {
+    tokenManager.clearTokens();
+    router.push("/login");
+  },
+});
 
 // Create Vue app instance
 const app = createApp(App);

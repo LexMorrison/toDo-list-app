@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { computed, useAttrs } from "vue";
 
+import VButton from "./VButton.vue";
+
 defineOptions({ inheritAttrs: false });
 
 const props = defineProps<{
@@ -12,8 +14,6 @@ const props = defineProps<{
 const emit = defineEmits<{
   // eslint-disable-next-line no-unused-vars
   (e: "update:modelValue", value: string): void;
-  // eslint-disable-next-line no-unused-vars
-  (e: "blur", ev: FocusEvent): void;
 }>();
 
 const attrs = useAttrs();
@@ -26,6 +26,7 @@ const value = computed({
 const clear = () => {
   emit("update:modelValue", "");
 };
+
 </script>
 
 <template>
@@ -41,11 +42,10 @@ const clear = () => {
     <!-- Input -->
     <input
       v-model="value"
-      :type="type || 'text'"
+      :type="props.type || 'text'"
       :placeholder="placeholder"
       v-bind="attrs"
       class="w-full rounded border py-[15px] pl-10 pr-20"
-      @blur="emit('blur', $event)"
     >
 
     <!-- Right actions -->
@@ -54,7 +54,7 @@ const clear = () => {
       class="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-2"
     >
       <!-- Clear -->
-      <button
+      <VButton
         v-if="modelValue"
         type="button"
         class="text-light-charcoalBlack hover:text-light-pureBlack
@@ -62,8 +62,7 @@ const clear = () => {
         @click.prevent="clear"
       >
         ✕
-      </button>
-
+      </VButton>
 
       <slot name="right" />
     </div>

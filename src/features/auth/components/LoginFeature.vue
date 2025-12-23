@@ -5,7 +5,7 @@ import Logo from "@/shared/ui/common/Logo.vue";
 </script>
 
 <template>
-  <div class="flex flex-col items-center pt-[85px]">
+  <div class="flex flex-col items-center ">
     <!-- logo and title -->
     <div class="mb-[13px] flex flex-col">
       <Logo />
